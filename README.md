@@ -1,4 +1,4 @@
-# The Rise of Pass-throughs: An Empirical Investigation Replication Repository
+# "The Rise of Pass-throughs: An Empirical Investigation" *Replication Repository*
 
 This repository is dedicated to replicating the results from the paper titled **"The Rise of Pass-throughs: An Empirical Investigation"** by [Sebastian Dyrda](https://www.dyrda.info/) (University of Toronto) and [Benjamin Pugsley](https://www.benjaminpugsley.com/) (University of Notre Dame).
 
@@ -28,7 +28,20 @@ To replicate the results presented in the paper, follow these steps:
 
 If you use the data or replication files from this repository in your research, please cite the original paper as follows:
 
-> Dyrda, Sebastian, and Pugsley, Benjamin. "The Rise of Pass-throughs: An Empirical Investigation." University of Toronto and University of Notre Dame.
+Dyrda S. and B. Pugsley (2023), "The Rise of Pass-throughs: An Empirical Investigation," Unpublished Manuscript.
+
+### BibTeX
+
+For those who wish to use BibTeX, you can cite the paper using the following entry:
+
+```bibtex
+@unpublished{DyrdaPugsley2023RiseOfPassThroughs,
+  title={The Rise of Pass-throughs: An Empirical Investigation},
+  author={Dyrda, Sebastian and Pugsley, Benjamin},
+  year={2023},
+  note={Unpublished Manuscript}
+}
+```
 
 ## License
 
