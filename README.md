@@ -1,6 +1,6 @@
 # "The Rise of Pass-throughs: An Empirical Investigation" *Replication Repository*
 
-This repository is dedicated to replicating the results from the paper titled **["The Rise of Pass-throughs: An Empirical Investigation"]([https://www.dyrda.info/](https://www.dyrda.info/files/Dyrda_Pugsley_emplfo.pdf)** by [Sebastian Dyrda](https://www.dyrda.info/) (University of Toronto) and [Benjamin Pugsley](https://www.benjaminpugsley.com/) (University of Notre Dame).
+This repository is dedicated to replicating the results from the paper titled **["The Rise of Pass-throughs: An Empirical Investigation"](https://www.dyrda.info/files/Dyrda_Pugsley_emplfo.pdf)** by [Sebastian Dyrda](https://www.dyrda.info/) (University of Toronto) and [Benjamin Pugsley](https://www.benjaminpugsley.com/) (University of Notre Dame).
 
 ## Repository Contents
 
