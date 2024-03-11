@@ -4,12 +4,13 @@ This repository is dedicated to replicating the results from the paper titled **
 
 ## Repository Contents
 
-The repository contains the following files for replication purposes:
+The repository contains the following folders for the replication purposes:
 
-1. **The Manuscript**: The original paper detailing the findings and methodology used in the study.
-2. **Excel Files**: These files contain data extracted from the Tax Legal Form of Organization Longitudinal Business Database (TLFO-LBD).
-3. **Matlab Files**: These files are used to replicate the figures and tables presented in the manuscript. Ensure you have Matlab installed to run these scripts.
-4. **Stata Files**: Contains the Stata scripts necessary to replicate the maps and density plots as shown in the paper. You will need Stata to execute these files.
+1. **Data**: 
+2. **Manuscript**: The original paper detailing the findings and methodology used in the study.
+3. **Excel Files**: These files contain data extracted from the Tax Legal Form of Organization Longitudinal Business Database (TLFO-LBD).
+4. **Matlab Files**: These files are used to replicate the figures and tables presented in the manuscript. Ensure you have Matlab installed to run these scripts.
+5. **Stata Files**: Contains the Stata scripts necessary to replicate the maps and density plots as shown in the paper. You will need Stata to execute these files.
 
 ## How to Use
 
