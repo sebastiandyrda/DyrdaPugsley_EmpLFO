@@ -6,7 +6,7 @@ This repository is dedicated to replicating the results from the paper titled **
 
 The repository contains the following folders for replication purposes:
 
-1. **data**: Disclosed data from the Longitudinal Business Dynamics Tax Legal Form of Organization database, Business Dynamics Statistics Data (BDS), Statistics of US Businesses (SUSB), and other data sources used in the paper.
+1. **data**: Disclosed data from the Longitudinal Business Dynamics Tax Legal Form of Organization (LBD-TLFO) database, Business Dynamics Statistics Data (BDS), Statistics of US Businesses (SUSB), and other data sources used in the paper.
 2. **manuscript**: The original paper detailing the findings and methodology used in the study.
 3. **output**: Figures and Tables used in the paper.
 4. **programs**: MATLAB and Stata files generating figures and tables used in the paper.
