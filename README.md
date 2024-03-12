@@ -6,11 +6,10 @@ This repository is dedicated to replicating the results from the paper titled **
 
 The repository contains the following folders for the replication purposes:
 
-1. **data**: 
+1. **data**: Disclosed data from the Longitufinal Business Dynamics Tax Legal Form of Organization database, Business Dynamics Statistics Data (BDS), Statistics of US Businesses (SUSB) and other data sources used in the paper. 
 2. **manuscript**: The original paper detailing the findings and methodology used in the study.
-3. **output**: These files contain data extracted from the Tax Legal Form of Organization Longitudinal Business Database (TLFO-LBD).
-4. **programs**: These files are used to replicate the figures and tables presented in the manuscript. Ensure you have Matlab installed to run these scripts.
-5. **Stata Files**: Contains the Stata scripts necessary to replicate the maps and density plots as shown in the paper. You will need Stata to execute these files.
+3. **output**: Figures and Tables used in the paper.
+4. **programs**: Matlab and Stata files generating figures and tables used in the paper.
 
 ## How to Use
 
@@ -18,8 +17,8 @@ To replicate the results presented in the paper, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Ensure you have Matlab and Stata installed on your computer.
-3. Run the Matlab files to replicate the figures and tables.
-4. Execute the Stata files to generate the maps and density plots.
+3. Run the Matlab file run_all_matlab.m to replicate the figures and tables.
+4. Execute the Stata file run_all_stata.do to generate the heatmaps and density plots.
 
 ## Requirements
 
