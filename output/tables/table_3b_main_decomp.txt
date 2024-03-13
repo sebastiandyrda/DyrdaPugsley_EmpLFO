@@ -1,0 +1,7 @@
+---COPY LATEX CODE INTO TABLE---
+ & 82-90 & 90-00 & 00-15 & \textbf{82-15} \\ 
+\midrule Convergence &   -2.4 &   -0.2 &    0.0 & \textbf{  -2.6} \\ 
+$\Delta$ Firm dynamics &    1.6 &    3.2 &   -0.2 & \textbf{   4.6} \\ 
+$\Delta$ Reorganization &    4.4 &    1.9 &    2.6 & \textbf{   8.9} \\ 
+$\Delta$ Entry org. &    2.6 &    7.2 &    7.0 & \textbf{  16.8} \\ 
+\midrule \textbf{Total} & \textbf{   6.3} & \textbf{  12.0} & \textbf{   9.4} & \textbf{  27.7} \\ 

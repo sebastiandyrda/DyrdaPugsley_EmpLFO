@@ -1,0 +1,11 @@
+------COPY LATEX CODE BELOW -----------------
+ & \multicolumn{2-10}{c}{\textit{A. Share of All Businesses (Percent)} \\ 
+\cmidrule(lr){4-8}
+C corporations ($c$) &  51.7 &  46.8 &  41.3 &  38.8 &  35.2 &  33.4 &  31.3 &  30.7 &  28.3 \\
+Pass-through ($p$) &  35.6 &  37.5 &  43.3 &  47.3 &  50.4 &  55.2 &  58.7 &  59.7 &  62.8 \\
+Other ($z$) &  12.7 &  15.7 &  15.3 &  14.0 &  14.5 &  11.5 &  10.0 &   9.5 &   9.0 \\
+ & \multicolumn{2-10}{c}{\textit{B. Share of Entering Businesses (Percent)} \\ 
+\cmidrule(lr){4-8}
+C corporations ($c$) &  41.1 &  36.1 &  32.5 &  31.4 &  28.7 &  28.3 &  26.8 &  27.5 &  23.4 \\
+Pass-through ($p$) &  40.9 &  43.9 &  50.6 &  54.7 &  55.2 &  64.3 &  66.8 &  67.1 &  72.7 \\
+Other ($z$) &  18.0 &  19.9 &  16.9 &  13.9 &  16.1 &   7.4 &   6.4 &   5.4 &   3.8 \\
