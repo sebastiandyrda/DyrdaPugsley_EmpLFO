@@ -48,8 +48,7 @@ For those who wish to use BibTeX, you can cite the paper using the following ent
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-## Acknowledgments
-
+## Contacts
 - [Sebastian Dyrda](https://www.dyrda.info/), University of Toronto
 - [Benjamin Pugsley](https://www.benjaminpugsley.com/), University of Notre Dame
 
