@@ -24,6 +24,7 @@ To replicate the results presented in the paper, follow these steps:
 
 - MATLAB (for figures and tables)
 - Stata (for maps and density plots)
+- Microsoft Excel (to load csv and xlsx files)
 
 ## Citation
 
