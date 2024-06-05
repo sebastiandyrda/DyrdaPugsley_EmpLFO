@@ -38,6 +38,8 @@ years = 1982:2015;
 
 NumLines   = 6;
 Colors = linspecer(NumLines,'qualitative'); 
+marker_size = 7;
+markers = {'none','square','diamond','*'};
 
 
 %%
@@ -54,7 +56,10 @@ set(FigHandle, 'Position', figpos);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years, passthru_share_eq, years, passthru_share_emp);
+plot(years, passthru_share_eq);
+hold on
+plot(years, passthru_share_emp, 'Marker',markers{2},'MarkerSize',marker_size);
+hold off
 axis([1980 2015 10 70])
 legend ('Equally weighted', 'Employment weighted', 'location', 'SouthEast')
 legend boxoff
@@ -81,9 +86,8 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years, passthru_share_eq);
 hold on
-plot(years, passthru_share_eq_constind); 
-hold on
-plot(years, passthru_share_eq_conststate);
+plot(years, passthru_share_eq_constind,'Marker',markers{2},'MarkerSize',marker_size); 
+plot(years, passthru_share_eq_conststate,'Marker',markers{3},'MarkerSize',marker_size);
 axis([1980 2015 30 70])
 legend ('Actual', 'Constant Industry Weights', 'Constant State Weights', 'location', 'SouthEast')
 legend boxoff
@@ -182,7 +186,7 @@ fprintf('wrote figure 1d to output/figures/fig_1d_agg_indconv_lfit.eps\n')
 %
 % FIGURE 3a: MAIN DECOMPOSITION  
 %
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -200,9 +204,13 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years_oldrelease, passthru_actual);
 hold on
-plot(years_oldrelease,passthru_cf_GFR);
-plot(years_oldrelease, passthru_cf_GF);
-plot(years_oldrelease, passthru_cf_G);
+% set(plot1(1),'DisplayName','+ Entry Organization = Actual','MarkerSize',5);
+% set(plot1(2),'DisplayName','+ Reorganization','Marker','+');
+% set(plot1(3),'DisplayName','+ Firm Dynamics','Marker','diamond');
+% set(plot1(4),'DisplayName','Convergence','Marker','*');
+plot(years_oldrelease,passthru_cf_GFR, 'Marker',markers{2},'MarkerSize',marker_size);
+plot(years_oldrelease, passthru_cf_GF, 'Marker',markers{3},'MarkerSize',marker_size);
+plot(years_oldrelease, passthru_cf_G, 'Marker',markers{4},'MarkerSize',marker_size);
 hold off
 axis([1980 2015 30 70])
 legend ('+ Entry Organization = Actual', '+ Reorganization', '+ Firm Dynamics', 'Convergence', 'location', 'NorthWest')
@@ -216,7 +224,7 @@ fprintf('wrote figure 3a to output/figures/fig_3a_cf_main.eps\n')
 %
 % FIGURE/TABLE 3b: MAIN DECOMPOSITION TABLE
 %
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 passthru_actual = tmpbuf(idx_years,2)*100;
 passthru_cf_G = tmpbuf(idx_years,3)*100; % convergence (hold all)
@@ -294,7 +302,7 @@ fprintf('wrote table 3b to output/tables/table_3b_main_decomp.txt\n')
 %
 % FIGURE 4a: SLOW DIFFUSION
 %
-tmpbuf = xlsread(cf_file, 'A2:M35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:M35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -306,9 +314,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, passthru_actual, ...
-    years_oldrelease, passthru_cf_slow ...
-    );
+plot(years_oldrelease, passthru_actual);
+hold on
+plot(years_oldrelease, passthru_cf_slow, 'Marker',markers{2},'MarkerSize',marker_size);
 axis([1980 2015 30 70])
 legend ('Actual', 'No post 1990 changes','location', 'NorthWest')
 legend boxoff
@@ -327,9 +335,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, entrant_actual, ...
-    years_oldrelease, entrant_cf_slow ...
-    );
+plot(years_oldrelease, entrant_actual);
+hold on
+plot(years_oldrelease, entrant_cf_slow, 'Marker',markers{2}, 'MarkerSize',marker_size);
 axis([1980 2015 40 80])
 ylabel('Percent') 
 print('-depsc2',fullfile(pwd,'../output/figures','fig_4b_entrant_cf_slow'))
@@ -348,9 +356,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, reorg_ctop_actual, ...
-    years_oldrelease, reorg_ctop_cf_slow ...
-    );
+plot(years_oldrelease, reorg_ctop_actual);
+hold on
+plot(years_oldrelease, reorg_ctop_cf_slow, 'Marker',markers{2}, 'MarkerSize',marker_size);
 axis([1980 2015 0 7])
 ylabel('Percent') 
 print('-depsc2',fullfile(pwd,'../output/figures','fig_4c_reorg_ctop_cf_slow'))
@@ -367,9 +375,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, reorg_ptoc_actual, ...
-    years_oldrelease, reorg_ptoc_cf_slow ...
-    );
+plot(years_oldrelease, reorg_ptoc_actual);
+hold on
+plot(years_oldrelease, reorg_ptoc_cf_slow, 'Marker',markers{2}, 'MarkerSize',marker_size);
 axis([1980 2015 0 7])
 ylabel('Percent') 
 print('-depsc2',fullfile(pwd,'../output/figures','fig_4d_reorg_ptoc_cf_slow'))
@@ -382,13 +390,13 @@ fprintf('wrote figure 4d to output/figures/fig_4d_reorg_ptoc_cf_slow.eps\n');
 % FIGURE 5a/b: NO STARTUP DEFICIT COUNTERFACTUAL 
 %
 
-tmpbuf = xlsread(cf_file, 'A2:S35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:S35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
 passthru_cf_nostartupdef = tmpbuf(idx_years,19)*100;
 
-tmpbuf = xlsread(cf_file, 'A2:W35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:W35','readvariablenames',false));
 startup_rate_t = tmpbuf(idx_years,22)*100;
 startup_rate_cf_t = tmpbuf(idx_years,23)*100;
 
@@ -401,9 +409,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, startup_rate_t, ...
-    years_oldrelease, startup_rate_cf_t ...
-    );
+plot(years_oldrelease, startup_rate_t);
+hold on
+plot(years_oldrelease, startup_rate_cf_t, 'Marker',markers{2}, 'MarkerSize',marker_size);
 axis([1980 2015 08 16])
 yticks(8:16)
 ylabel('Percent') 
@@ -421,7 +429,7 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years_oldrelease, passthru_actual);
 hold on
-plot(years_oldrelease, passthru_cf_nostartupdef);
+plot(years_oldrelease, passthru_cf_nostartupdef, 'Marker',markers{2}, 'MarkerSize',marker_size);
 hold off
 axis([1980 2015 30 80])
 legend ('Actual', 'No startup deficit','location', 'NorthWest')
@@ -447,7 +455,7 @@ p_to_c_time = [mean(reorg_age_time_raw(:,[2,4]),2)';
     reorg_age_time_raw(:,14)'];
 
 passthru_ageconst_raw = readmatrix(rdc_output_file,'Sheet','decomposition_US_constant_age_T','Range','B2:B34')*100;
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -465,7 +473,7 @@ set(groot,'DefaultAxesFontSize',font_axes_2pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(1:7, c_to_p_age)
 hold on
-plot(1:7, p_to_c_age)
+plot(1:7, p_to_c_age, 'Marker',markers{2}, 'MarkerSize', marker_size)
 hold off
 ax = gca(FigHandle);
 %ax.XAxis.FontSize = 15;
@@ -489,7 +497,7 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years_oldrelease, passthru_actual);
 hold on
-plot(years_oldrelease,passthru_ageconst);
+plot(years_oldrelease,passthru_ageconst, 'Marker', markers{2}, 'MarkerSize', marker_size);
 hold off
 axis([1980 2015 30 80])
 legend ('Actual', 'Constant age composition', 'location', 'NorthWest')
@@ -611,7 +619,7 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 % now plot
 plot1 = plot(susbTable.year, susbTable.estabs_susb, 'DisplayName', 'SUSB');
 hold on
-plot2 = plot(susbTable.year, passthru_share_eq_modified, 'DisplayName', 'LBD-TLFO');
+plot2 = plot(susbTable.year, passthru_share_eq_modified, 'Marker',markers{2},'MarkerSize',marker_size, 'DisplayName', 'LBD-TLFO');
 
 % set y-axis limits
 ylim([50 80]);
@@ -639,7 +647,7 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 % now plot
 plot1 = plot(susbTable.year, susbTable.emp_susb, 'DisplayName', 'SUSB');
 hold on
-plot2 = plot(susbTable.year, passthru_share_emp_modified, 'DisplayName', 'LBD-TLFO');
+plot2 = plot(susbTable.year, passthru_share_emp_modified, 'Marker',markers{2},'MarkerSize',marker_size, 'DisplayName', 'LBD-TLFO');
 
 % set y-axis limits
 ylim([30 60]);
@@ -664,7 +672,7 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years, passthru_share_eq);
 hold on
-plot(years, passthru_share_eq_noz);
+plot(years, passthru_share_eq_noz, 'Marker',markers{2},'MarkerSize',marker_size);
 axis([1980 2015 40 70])
 legend ('with Z flows', 'No Z flows', 'location', 'SouthEast')
 legend boxoff
@@ -677,7 +685,7 @@ fprintf('wrote figure C.1 to output/figures/fig_c1_actual_compare_noz.eps\n');
 %
 % APPENDIX FIGURE C.2 : MAIN DECOMPOSITION AGAINST MORE GRANULAR
 %
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -704,12 +712,12 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 p1 = plot(years_oldrelease, passthru_actual);
 hold on
-p2 = plot(years_oldrelease,passthru_cf_GFR,'color',Colors(2,:));
-plot(years_oldrelease,passthru_cf_GFR_granular,':','color',Colors(2,:));
-p3 = plot(years_oldrelease, passthru_cf_GF,'color',Colors(3,:));
-plot(years_oldrelease,passthru_cf_GF_granular,':','color',Colors(3,:));
-p4 = plot(years_oldrelease, passthru_cf_G,'color',Colors(4,:));
-plot(years_oldrelease,passthru_cf_G_granular,':','color',Colors(4,:));
+p2 = plot(years_oldrelease,passthru_cf_GFR,'color',Colors(2,:), 'Marker', markers{2}, 'MarkerSize', marker_size);
+plot(years_oldrelease,passthru_cf_GFR_granular,':','color',Colors(2,:), 'Marker', markers{2}, 'MarkerSize', marker_size);
+p3 = plot(years_oldrelease, passthru_cf_GF,'color',Colors(3,:), 'Marker', markers{3}, 'MarkerSize', marker_size);
+plot(years_oldrelease,passthru_cf_GF_granular,':','color',Colors(3,:), 'Marker', markers{3}, 'MarkerSize', marker_size);
+p4 = plot(years_oldrelease, passthru_cf_G,'color',Colors(4,:), 'Marker', markers{4}, 'MarkerSize', marker_size);
+plot(years_oldrelease,passthru_cf_G_granular,':','color',Colors(4,:), 'Marker', markers{4}, 'MarkerSize', marker_size);
 hold off
 axis([1980 2015 30 70])
 legend ([p1 p2 p3 p4], {'$GFRE$=Actual', '$GFR$', '$GF$', '$G$'}, 'location', 'NorthWest')
@@ -805,7 +813,7 @@ fprintf('wrote table C.1 to output/tables/table_c1_main_decomp_granular.txt\n');
 %
 % APPENDIX FIGURE C.3 : MAIN DECOMPOSITION WITH AGE DEPENDENCE
 %
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -836,12 +844,12 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 p1 = plot(years_oldrelease, passthru_actual);
 hold on
-p2 = plot(years_oldrelease,passthru_cf_GFR_granular,'color',Colors(2,:));
-plot(years_oldrelease,passthru_cf_GFR_age,':','color',Colors(2,:));
-p3 = plot(years_oldrelease, passthru_cf_GF_granular,'color',Colors(3,:));
-plot(years_oldrelease,passthru_cf_GF_age,':','color',Colors(3,:));
-p4 = plot(years_oldrelease, passthru_cf_G_granular,'color',Colors(4,:));
-plot(years_oldrelease,passthru_cf_G_age,':','color',Colors(4,:));
+p2 = plot(years_oldrelease,passthru_cf_GFR_granular,'color',Colors(2,:), 'Marker', markers{2}, "MarkerSize", marker_size);
+plot(years_oldrelease,passthru_cf_GFR_age,':','color',Colors(2,:), 'Marker', markers{2}, "MarkerSize", marker_size);
+p3 = plot(years_oldrelease, passthru_cf_GF_granular,'color',Colors(3,:), 'Marker', markers{3}, "MarkerSize", marker_size);
+plot(years_oldrelease,passthru_cf_GF_age,':','color',Colors(3,:), 'Marker', markers{3}, "MarkerSize", marker_size);
+p4 = plot(years_oldrelease, passthru_cf_G_granular,'color',Colors(4,:), 'Marker', markers{4}, "MarkerSize", marker_size);
+plot(years_oldrelease,passthru_cf_G_age,':','color',Colors(4,:), 'Marker', markers{4}, "MarkerSize", marker_size);
 hold off
 axis([1980 2015 30 70])
 legend ([p1 p2 p3 p4], {'$GFRE$=Actual', '$GFR$', '$GF$', '$G$'}, 'location', 'NorthWest')
@@ -855,7 +863,7 @@ fprintf('wrote figure C.3 to output/figures/fig_c3_cf_main_granular_age.eps\n');
 %
 % APPENDIX TABLE C.2 : MAIN DECOMPOSITION DETAIL (GRANULAR AND AGE)
 %
-tmpbuf = xlsread(cf_file, 'A2:F35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:F35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -940,7 +948,7 @@ fprintf('wrote table C.2 to output/tables/table_c2_main_decomp_age.txt\n');
 %
 % APPENDIX FIGURE C.4 : NO STARTUP DEF CF WITH AGE COMP 
 %
-tmpbuf = xlsread(cf_file, 'A2:S35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:S35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -958,8 +966,8 @@ set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
 plot(years_oldrelease, passthru_actual);
 hold on
-plot(years_oldrelease, passthru_cf_nostartupdef);
-plot(years_oldrelease, passthru_cf_nostartupdef2);
+plot(years_oldrelease, passthru_cf_nostartupdef, 'Marker', markers{2}, "MarkerSize", marker_size);
+plot(years_oldrelease, passthru_cf_nostartupdef2, 'Marker', markers{3}, "MarkerSize", marker_size);
 hold off
 axis([1980 2015 30 80])
 legend ('Actual', 'No startup deficit', 'Age composition adjustment', 'location', 'NorthWest')
@@ -975,7 +983,7 @@ fprintf('wrote figure C.4 to output/figures/fig_c4_cf_nostartupdef2.eps\n');
 % FIGURE C.5 : LONG RUN 
 %
 
-tmpbuf = xlsread(cf_file, 'A2:R35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:R35','readvariablenames',false));
 idx_years = 1:34;
 years_oldrelease = tmpbuf(idx_years,1);
 passthru_actual = tmpbuf(idx_years,2)*100;
@@ -1014,10 +1022,11 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, passthru_actual_lr, ':', ...
-    years_oldrelease, passthru_cf_GFR_lr, ':', ...
-    years_oldrelease, passthru_cf_GF_lr, ':', ...
-    years_oldrelease, passthru_cf_G_lr, ':');
+plot(years_oldrelease, passthru_actual_lr, ':');
+hold on
+plot(years_oldrelease, passthru_cf_GFR_lr, ':', 'Marker', markers{2}, "MarkerSize", marker_size);
+plot(years_oldrelease, passthru_cf_GF_lr, ':', 'Marker', markers{3}, "MarkerSize", marker_size);
+plot(years_oldrelease, passthru_cf_G_lr, ':', 'Marker', markers{4}, "MarkerSize", marker_size);
 axis([1980 2015 30 80])
 legend ('$GFRE$=Actual', '$GFR$', '$GF$', '$G$', 'location', 'NorthWest')
 legend boxoff
@@ -1063,7 +1072,7 @@ set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 plot(subset.year, subset.estabs_share*100, 'LineWidth', 2);
 hold on
-plot(subset.year, subset.emp_share*100, 'LineWidth', 2);
+plot(subset.year, subset.emp_share*100, 'LineWidth', 2, 'Marker', markers{2}, "MarkerSize", marker_size);
 legend ('Businesses', 'Employment', 'location', 'NorthEast')
 legend boxoff
 xlabel('Year')
@@ -1077,7 +1086,7 @@ fprintf('wrote figure D.1 to output/figures/fig_d1_manufacturing_bds.eps\n');
 %
 % APPENDIX FIGURE D.2: EXIT RATES BY TLFO
 %
-tmpbuf = xlsread(cf_file, 'A2:U35');
+tmpbuf = table2array(readtable(cf_file, 'Range', 'A2:U35','readvariablenames',false));
 passthru_actual = tmpbuf(idx_years,2)*100;
 ccorp_exit = tmpbuf(idx_years,21)*100;
 passthru_exit = tmpbuf(idx_years,20)*100;
@@ -1088,9 +1097,9 @@ set(FigHandle, 'Position', [100, 100, 600, 7/8*600]);
 set(groot,'DefaultTextFontSize',font_text_1pane)
 set(groot,'DefaultAxesFontSize',font_axes_1pane)
 axes('NextPlot','replacechildren', 'ColorOrder',Colors);
-plot(years_oldrelease, passthru_exit, ...
-    years_oldrelease, ccorp_exit ...
-    );
+plot(years_oldrelease, passthru_exit);
+hold on
+plot(years_oldrelease, ccorp_exit, 'Marker', markers{2}, "MarkerSize", marker_size);
 axis([1980 2015 0 30 ])
 legend ('Pass through exit rate', 'C Corp exit rate','location', 'NorthEast')
 legend boxoff

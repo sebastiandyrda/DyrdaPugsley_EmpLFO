@@ -35,8 +35,8 @@ if _rc != 0 {
 	else {
 		disp "maptile is not installed. do file cannot create maptile plots"
 	}
-	
 }
+
 cap set scheme cleanplots
 if _rc != 0 {
 	disp "cleanplots package needs to be installed. enter 1 to install", _request(ans)
@@ -45,6 +45,17 @@ if _rc != 0 {
 		}
 	else {
 		disp "cleanplots package scheme not installed. do file cannot apply cleanplot scheme"
+	}
+}
+
+cap which spmap
+if _rc != 0 {
+	disp "spmap package needs to be installed. enter 1 to install", _request(ans)
+	if "$ans" == "1" {
+		ssc install spmap
+		}
+	else {
+		disp "spmap is not installed. do file cannot create spmap plots"
 	}
 }
 
@@ -159,7 +170,10 @@ import excel "../data/restricted/disclosed/req10739_20230720/disclosure_output_p
 * List all double variables
 qui: ds, has(type double)
 
-twoway (kdensity early8284, kernel(epan2 ) lwidth(thick)) (kdensity late1315, kernel(epan2 ) lwidth(thick)), ///
+* Set graph scheme
+set scheme cleanplots 	
+
+twoway (kdensity early8284, kernel(epan2 ) lwidth(thick)) (kdensity late1315, kernel(epan2 ) lpattern(dash) lwidth(thick)), ///
 	legend(rows(1) label(1 "1982") label(2 "2015") size(*1.5) symxsize(*1.5) position(6) colgap(*4)) ///
 	name(passthru_state) ///
 	xlabel(0.25[.1].95, nogrid labsize(*1.5)) ylabel(, nogrid labsize(*1.5)) ///
@@ -171,8 +185,10 @@ clear
 
 import excel "../data/restricted/disclosed/req10739_20230720/disclosure_output_post.xlsx", sheet("heatmap_naics_T13T26") cellrange(A1:C52) firstrow 
 
+* Set graph scheme
+set scheme cleanplots 	
 
-twoway (kdensity early8284, kernel(epan2 ) lwidth(thick)) (kdensity late1315, kernel(epan2 ) lwidth(thick)), ///
+twoway (kdensity early8284, kernel(epan2 ) lwidth(thick)) (kdensity late1315, kernel(epan2 ) lpattern(dash) lwidth(thick)), ///
 	legend(rows(1) label(1 "1982") label(2 "2015") size(*1.5) symxsize(*1.5) position(6) colgap(*4)) ///
 	name(passthru_naics) ///
 	xlabel(0.0[.1].9, nogrid labsize(*1.5)) ylabel(, nogrid labsize(*1.5)) ///
@@ -204,12 +220,14 @@ foreach var in firms estabs emp{
 	*replace `var'_share = 100 * `var'_share
 }
 
+* Set graph scheme
+set scheme cleanplots 	
 
-twoway (kdensity estabs_share if year == 1982) (kdensity estabs_share if year == 1990) (kdensity estabs_share if year == 2000) (kdensity estabs_share if year == 2015), ///
+twoway (kdensity estabs_share if year == 1982) (kdensity estabs_share if year == 1990, lpattern(dash)) (kdensity estabs_share if year == 2000, lpattern(shortdash)) (kdensity estabs_share if year == 2015, lpattern(longdash)), ///
 	legend(rows(2) label(1 "1982") label(2 "1990") label(3 "2000") label(4 "2015") size(*1.5) symxsize(*1.5) position(6) colgap(*4)) ///
 	xlabel(0[.01].13, nogrid) ylabel(, nogrid) ///
 	name(est) ///
-	ytitle(Kernal Density)  xtitle("")
+	ytitle(Kernal Density, size(*1.5))  xtitle("")
 
 graph export "../output/figures/fig_d4c_state_estabs_kernel.eps", as(eps) replace
 
@@ -242,7 +260,7 @@ foreach var in firms estabs emp{
 * Set graph scheme
 set scheme cleanplots 	
 	
-	twoway (kdensity estabs_share if year == 1982, lwidth(*1.5)) (kdensity estabs_share if year == 1990, lwidth(*1.5)) (kdensity estabs_share if year == 2000, lwidth(*1.5)) (kdensity estabs_share if year == 2015, lwidth(*1.5)), ///
+	twoway (kdensity estabs_share if year == 1982, lwidth(*1.5)) (kdensity estabs_share if year == 1990, lpattern(dash) lwidth(*1.5)) (kdensity estabs_share if year == 2000, lpattern(shortdash) lwidth(*1.5)) (kdensity estabs_share if year == 2015, lpattern(longdash) lwidth(*1.5)), ///
 	legend(rows(2) label(1 "1982") label(2 "1990") label(3 "2000") label(4 "2015") size(*1.5) symxsize(*1.5) position(6) colgap(*4)) ///
 	xlabel(0[.02].08, nogrid labsize(*1.5)) ylabel(, nogrid labsize(*1.5)) ///
 	name(`var') ///
